@@ -55,6 +55,7 @@ exports.uploadDataFromSheet = functions.https.onRequest(async (req, res) => {
     // Commit the batch operation to Firestore
     await batch.commit();
     
+    
     res.status(200).send("Data uploaded to Firestore successfully.");
   } catch (error) {
     console.error("Error fetching data from Google Sheets:", error);
