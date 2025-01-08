@@ -25,16 +25,16 @@ const sheets = google.sheets('v4');
 const spreadsheetId = process.env.SPREADSHEET_ID;  // Use environment variable for spreadsheet ID
 
 // Function to get data from Google Sheets
-async function getDataFromSheet() {
+async function getDataFromSheet(req, res) {
   try {
     await authClient.authorize();
-    const res = await sheets.spreadsheets.values.get({
+    const sheetRes = await sheets.spreadsheets.values.get({
       auth: authClient,
       spreadsheetId,
       range: process.env.SHEET_RANGE  // Use environment variable for range
     });
 
-    const rows = res.data.values;
+    const rows = sheetRes.data.values;
     if (rows.length) {
       const rowCount = rows.length;
       const range = `Sheet1!A1:E${rowCount}`;  // Adjust range based on the number of rows
@@ -50,14 +50,18 @@ async function getDataFromSheet() {
       if (data.length) {
         console.log('Data from Google Sheet:', data);
         await uploadToFirestore(data);
+        res.status(200).send('Data synced successfully!');
       } else {
         console.log('No data found.');
+        res.status(404).send('No data found.');
       }
     } else {
       console.log('No data found.');
+      res.status(404).send('No data found.');
     }
   } catch (error) {
     console.error('Error fetching data from Google Sheets:', error);
+    res.status(500).send('Error fetching data from Google Sheets.');
   }
 }
 
@@ -75,7 +79,7 @@ async function uploadToFirestore(data) {
         idNumber,
         totalScore,
         status
-      });
+      }, { merge: true });  // Use merge to update existing documents
 
       console.log(`Uploaded trainee-${index}:`, {
         fullName,
@@ -91,7 +95,5 @@ async function uploadToFirestore(data) {
   }
 }
 
-// Run the script
-getDataFromSheet().catch(err => {
-  console.error('Script execution error:', err);
-});
+// Export the function for Google Cloud Functions
+exports.syncData = getDataFromSheet;
