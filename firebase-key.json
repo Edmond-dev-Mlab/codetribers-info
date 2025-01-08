@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "perfect-physics-447214-f4",
+  "private_key_id": "3aca94f18281ee157657c24db5b1009b04280761",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCpY4LYcQgrFFLn\n1pGK1NdCB+qtInUvb9TqJwKey8HJ915qftTxvKvDACqG/FPsRxtHhmWH9AdZy21+\nsiNnMaGsfsoIombAZDhNl89ZVIfniucskcYe0hmF6ephl2384bQofhYr2iaHszVb\nPJd6xjRe+GuVv/fv404Qiym5dyYbKbpiTng9mD8MRmi1zh8Dhxfbt7YnSTQduqOF\nM8i81ufd6QmdnogQRC1KN2jLJ2DfEwGAjzgHN6V8W4B7TGqUb8VIW0bacW0d1f3q\nUTvdiC0jzG4i/t/2iZrEaOeKc8pfHSRjtbw1BIhTlQKqT/jtKMnZMuD9rELGqwqP\nwP54mX3fAgMBAAECggEAFwR0L8gwRXZWC7XvAhAJDip4O72eces+4fCaHQzwEOtB\n07PXaN/r8SwRG1Wna8h/zvjWzCIfa5bGkrxPLkMixodWGdVDpCoaMoUKAogHjbGk\n1zwZ0W9YU4elN0y1//KFoij8B0p2COOTwQmbRe4wCKW2LNuwq9LV9U6LxW2I6pDI\n6NBQJeQQQUCDOOCkkUQiCvbOpCP62RV+P6tbgUm+IYxYxove2IONeWMDlwO3iZcM\n8R4QWrb9tOQgDyk3gw2fBpQIluDjaVFVo7ot1mEiWMaAO6YHnVdGfItVvpdb0wTI\nnMU60yU0e9dXb9jBe3dOvs1iAS+vI8QhTRKUdv0P7QKBgQDXFx85Edwkfdcb5gSC\nq+c/2P7V+lBMx1FfDMKb2lYx5Rd9hqE8npDez/xD9qxKY0RlRd7OAi7QN9ncp4pP\nMEAUt0+bUbW9lsRQtS20R4xgnTRJuzKI7CIbuwVJ/wpiOALSHYr/o7v+f/c+w9uB\n9HYnaOgJkcLvM8UvHTHy2Gkj0wKBgQDJmyZ68V+uJSTRtXllUxOjqS6LqcGjpxA+\nux20my0XGOZoYCitCoTAlmrG8Z7neYE9HgsUqfiB6CKT0ld7aRkbdDJt+frRivxg\nd7S9Vvj5rKT2ep6VLfAW0n0l7vUHq1yBhF0yrNmlWZCIsRxVY7KOfE36+ouISBPz\nL6QO0IoSRQKBgQCkbF2G7/s8viIZhp2+EpFFwqkUhDSsbNXsdkGyiJbJr5pkb+2D\n/Kc8XPw4LDKK7xWS4XWwQATvUTKvNjhJztW9wGAPmMf4tW8/TzEwFl3eYW5eSscX\n2oM8dZxWc6vJZ43od4MRZ2ZH6CTmiyybTHiiKdTvs8izuPysxoGvZfYB1wKBgQC5\n6tdIp1FaEizrK5SgyUUiN0GSUGEfX1BO2VXimPuzAiZw+MRqF3om9E/R2T52Lont\nZ8hGLRzcB8vjUCWWzGv38mcTHmWcWbS17Y6C0TLXZMvX9WpLHkr7cO8yTTQv92pe\nkkc0FUy8/GSaeeIsKL2gQqfTHLwSWI31ROjhNJUvlQKBgEePFysnZX55P6tGEt45\nRsM47TpXd803lYUsz0QIEIxcWcI7P16wTQV7yzkpN2rdXrnsoAutw7EaNlG2BBrn\n74ugvWgFrrpS1a9LzDODKnPNw8CvJKPSGoCadFHD+20+fxcdBt66k0G7rrbJ6Svu\nc8YnpwtqRASLKAtwgn81fFc4\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-zzk8y@perfect-physics-447214-f4.iam.gserviceaccount.com",
+  "client_id": "117308529322308377705",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-zzk8y%40perfect-physics-447214-f4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
