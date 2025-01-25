@@ -3,14 +3,37 @@ const admin = require('firebase-admin');
 const fs = require('fs');
 require('dotenv').config();  // Add this line to load environment variables
 
+// Check if environment variables are set
+const requiredEnvVars = ['FIREBASE_KEY', 'SHEETS_KEY', 'SPREADSHEET_ID', 'SHEET_RANGE'];
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+  console.error(`Missing required environment variables: ${missingEnvVars.join(', ')}`);
+  process.exit(1);
+}
+
+// Log the environment variables to debug
+console.log('FIREBASE_KEY:', process.env.FIREBASE_KEY);
+console.log('SHEETS_KEY:', process.env.SHEETS_KEY);
+
+// Parse JSON strings from environment variables
+let firebaseKey, sheetsKey;
+try {
+  firebaseKey = JSON.parse(process.env.FIREBASE_KEY);
+  sheetsKey = JSON.parse(process.env.SHEETS_KEY);
+} catch (error) {
+  console.error('Error parsing JSON from environment variables:', error);
+  process.exit(1);
+}
+
 // Initialize Firebase Admin SDK with credentials
 admin.initializeApp({
-  credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_KEY))
+  credential: admin.credential.cert(firebaseKey)
 });
 const firestore = admin.firestore();
 
 // Load client secrets for Google Sheets API
-const credentials = JSON.parse(process.env.SHEETS_KEY);
+const credentials = sheetsKey;
 
 // Configure JWT auth client for Google Sheets API
 const authClient = new google.auth.JWT(

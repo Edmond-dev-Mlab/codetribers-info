@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["google-sheets", "firebase", "firestore"],
-  "author": "Your Name",
+  "author": "Edmond",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
