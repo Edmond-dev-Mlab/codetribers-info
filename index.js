@@ -3,14 +3,37 @@ const admin = require('firebase-admin');
 const fs = require('fs');
 require('dotenv').config();  // Add this line to load environment variables
 
+// Check if environment variables are set
+const requiredEnvVars = ['FIREBASE_KEY', 'SHEETS_KEY', 'SPREADSHEET_ID', 'SHEET_RANGE'];
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+  console.error(`Missing required environment variables: ${missingEnvVars.join(', ')}`);
+  process.exit(1);
+}
+
+// Log the environment variables to debug
+console.log('FIREBASE_KEY:', process.env.FIREBASE_KEY);
+console.log('SHEETS_KEY:', process.env.SHEETS_KEY);
+
+// Parse JSON strings from environment variables
+let firebaseKey, sheetsKey;
+try {
+  firebaseKey = JSON.parse(process.env.FIREBASE_KEY);
+  sheetsKey = JSON.parse(process.env.SHEETS_KEY);
+} catch (error) {
+  console.error('Error parsing JSON from environment variables:', error);
+  process.exit(1);
+}
+
 // Initialize Firebase Admin SDK with credentials
 admin.initializeApp({
-  credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_KEY))
+  credential: admin.credential.cert(firebaseKey)
 });
 const firestore = admin.firestore();
 
 // Load client secrets for Google Sheets API
-const credentials = JSON.parse(process.env.SHEETS_KEY);
+const credentials = sheetsKey;
 
 // Configure JWT auth client for Google Sheets API
 const authClient = new google.auth.JWT(
@@ -96,9 +119,36 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.get('/', (req, res) => {
-  res.send('Hello, Cloud Run!');
+// Root endpoint to retrieve and display trainee information
+app.get('/', async (req, res) => {
+  try {
+    const traineesSnapshot = await firestore.collection('trainees').get();
+    const trainees = [];
+    traineesSnapshot.forEach(doc => {
+      trainees.push(doc.data());
+    });
+    res.json(trainees);
+  } catch (error) {
+    console.error('Error retrieving trainees:', error);
+    res.status(500).send('Error retrieving trainees');
+  }
 });
+
+// New endpoint to retrieve trainee information
+app.get('/trainees', async (req, res) => {
+  try {
+    const traineesSnapshot = await firestore.collection('trainees').get();
+    const trainees = [];
+    traineesSnapshot.forEach(doc => {
+      trainees.push(doc.data());
+    });
+    res.json(trainees);
+  } catch (error) {
+    console.error('Error retrieving trainees:', error);
+    res.status(500).send('Error retrieving trainees');
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -109,4 +159,4 @@ setInterval(() => {
   getDataFromSheet().catch(err => {
     console.error('Script execution error:', err);
   });
-}, 60000);  // Sync every 60 seconds
+}, 300000);  // Sync every 5 minutes
