@@ -91,9 +91,49 @@ async function uploadToFirestore(data) {
   }
 }
 
+// Start the server
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8080;
+
+// Root endpoint to retrieve and display trainee information
+app.get('/', async (req, res) => {
+  try {
+    const traineesSnapshot = await firestore.collection('trainees').get();
+    const trainees = [];
+    traineesSnapshot.forEach(doc => {
+      trainees.push(doc.data());
+    });
+    res.json(trainees);
+  } catch (error) {
+    console.error('Error retrieving trainees:', error);
+    res.status(500).send('Error retrieving trainees');
+  }
+});
+
+// New endpoint to retrieve trainee information
+app.get('/trainees', async (req, res) => {
+  try {
+    const traineesSnapshot = await firestore.collection('trainees').get();
+    const trainees = [];
+    traineesSnapshot.forEach(doc => {
+      trainees.push(doc.data());
+    });
+    res.json(trainees);
+  } catch (error) {
+    console.error('Error retrieving trainees:', error);
+    res.status(500).send('Error retrieving trainees');
+  }
+});
+
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
 // Run the script periodically to sync data
 setInterval(() => {
   getDataFromSheet().catch(err => {
     console.error('Script execution error:', err);
   });
-}, 60000);  // Sync every 60 seconds
+}, 300000);  // Sync every 5 minutes
